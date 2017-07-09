@@ -13,6 +13,7 @@ import * as util from './renderUtil'
  * @param {number} width - width of the area to render in characters
  * @param {number} height - height of the area to render in characters
  * @param {calculationFunction} testerFunc - function that tests C
+ * @return {string} - an ASCII visualization
  */
 export function generateOutput(width, height, testerFunc) {
     let str = ''
