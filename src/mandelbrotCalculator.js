@@ -1,7 +1,7 @@
 'use strict'
 
 const bailout = 2
-let maxIterations = 1000
+export const maxIterations = 1000
 
 export const minCX = -2.5
 export const maxCX = 1
