@@ -17,9 +17,7 @@ import * as RenderUtil from './renderUtil.js'
  * @return {object} - modified imageData
  */
 export function render(imageData, testerFunc, maxIterations, centerc, widthc) {
-    // calculate heightc based on the aspect ratio of the imageData
-    let aspectRatio = imageData.width / imageData.height
-    let heightc = widthc / aspectRatio
+    let heightc = RenderUtil.calculateHeightC(widthc, imageData.width, imageData.height)
 
     // An escape histogram. Track the number of pixels in the image that escaped after 
     // [index] iterations. Index 0 represents pixels that lie within the set (i.e. did not

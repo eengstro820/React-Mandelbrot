@@ -32,14 +32,13 @@ export default class CanvasComponent extends React.Component {
         imageData = HistogramRenderer.render(imageData, Mandelbrot.escapeTimeTest,
             Mandelbrot.maxIterations, this.props.centerc, this.props.widthc)
         context.putImageData(imageData, 0, 0)
-
-        console.log("CanvasComponent.draw() returning.")
     }
 
     render() {
         return (
             <canvas ref={canvas => this.canvas = canvas} className={this.props.className}
-                width={this.props.width} height={this.props.height} />
+                width={this.props.width} height={this.props.height}
+                onClick={this.props.onClick} />
         );
     }
 }

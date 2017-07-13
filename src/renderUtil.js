@@ -25,3 +25,15 @@ export function normalizeY(y, height, centercy, heightc) {
     let cy = topc - y / (height - 1) * heightc
     return cy
 }
+
+/**
+ * Calculate the height in C, given the width in C and the dimensions in pixels.
+ * @param {number} widthc - rendered view width in C
+ * @param {number} width - width of the view in pixels
+ * @param {number} height - height of the view in pixels
+ * @return {number} rendered view height in C
+ */
+export function calculateHeightC(widthc, width, height) {
+    let aspectRatio = width / height
+    return widthc / aspectRatio
+}
