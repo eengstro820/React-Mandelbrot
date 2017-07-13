@@ -11,9 +11,16 @@ import * as RenderUtil from './renderUtil.js'
  * @param {object} imageData - an ImageData object to render to 
  * @param {calculateFunction} testerFunc - function that tests C
  * @param {number} maxIterations - the largest iteration value that testerFunc will return
+ * @param {number} centerc.x - center of the rendering area in C, X coord
+ * @param {number} centerc.y - center of the rendering area in C, Y coord
+ * @param {number} widthc - the width of the rendering area in C
  * @return {object} - modified imageData
  */
-export function render(imageData, testerFunc, maxIterations) {
+export function render(imageData, testerFunc, maxIterations, centerc, widthc) {
+    // calculate heightc based on the aspect ratio of the imageData
+    let aspectRatio = imageData.width / imageData.height
+    let heightc = widthc / aspectRatio
+
     // An escape histogram. Track the number of pixels in the image that escaped after 
     // [index] iterations. Index 0 represents pixels that lie within the set (i.e. did not
     // escape). 
@@ -29,8 +36,8 @@ export function render(imageData, testerFunc, maxIterations) {
         iterPixels.push([])
 
         for (let y = 0; y < imageData.height; ++y) {
-            let cx = RenderUtil.normalizeX(x, imageData.width)
-            let cy = RenderUtil.normalizeY(y, imageData.height)
+            let cx = RenderUtil.normalizeX(x, imageData.width, centerc.x, widthc)
+            let cy = RenderUtil.normalizeY(y, imageData.height, centerc.y, heightc)
             let iterations = testerFunc(cx, cy)
 
             iterPixels[x].push(iterations)

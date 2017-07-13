@@ -1,19 +1,27 @@
 /**
- * Normalize the pixel X to lie within the bounds of the mandelbrot set.
- * FIXME: currently the bounds are hard-coded.
- * @param {number} x - pixel X, indexed from 0
- * @param {number} width - the width of the area in pixels
+ * Convert a pixel location to CX.
+ * @param {number} x - pixel location, X (increasing right)
+ * @param {number} width - width of the view in pixels
+ * @param {number} centercx - center of the rendered view in C, X
+ * @param {number} widthc  - width of the rendered view in C
+ * @return {number} corresponding CX (increasing right)
  */
-export function normalizeX(x, width) {
-    return x / (width - 1) * 3.5 - 2.5
+export function normalizeX(x, width, centercx, widthc) {
+    let leftc = centercx - widthc / 2.0
+    let cx = leftc + x / (width - 1) * widthc
+    return cx
 }
 
 /**
- * Normalize the pixel Y to lie within the bounds of the mandelbrot set.
- * FIXME: currently the bounds are hard-coded.
- * @param {number} y - pixel Y, indexed from 0
- * @param {number} height - the height of the area in pixels
+ * Convert a pixel location to CY.
+ * @param {number} y - pixel location, Y (increasing down)
+ * @param {number} height - height of the view in pixels
+ * @param {number} centercy - center of the rendered view in C, Y
+ * @param {number} heightc - height of the rendered view in C
+ * @return {number} corresponding CY (increasing up)
  */
-export function normalizeY(y, height) {
-    return y / (height - 1) * 2 - 1
+export function normalizeY(y, height, centercy, heightc) {
+    let topc = centercy + heightc / 2.0
+    let cy = topc - y / (height - 1) * heightc
+    return cy
 }

@@ -20,7 +20,8 @@ export function generateOutput(width, height, testerFunc) {
     for (let y = 0; y < height; ++y) {
         let rowStr = ''
         for (let x = 0; x < width; ++x) {
-            let result = testerFunc(util.normalizeX(x, width), util.normalizeY(y, height))
+            let result = testerFunc(util.normalizeX(x, width, -0.75, 3.5), 
+                util.normalizeY(y, height, 0, 2))
             rowStr += result === 0 ? 'x' : '.'
         }
         str += rowStr + '\n'

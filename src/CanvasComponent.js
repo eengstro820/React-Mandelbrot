@@ -9,34 +9,13 @@ import * as Mandelbrot from './mandelbrotCalculator'
 export default class CanvasComponent extends React.Component {
     constructor(props) {
         super(props);
-
-        this._resizeHandler = () => {
-            /* Allows CSS to determine size of canvas */
-            this.canvas.width = this.canvas.clientWidth;
-            this.canvas.height = this.canvas.clientHeight;
-
-            this.clearAndDraw();
-        }
     }
-
-    componentDidMount() {
-        window.addEventListener('resize', this._resizeHandler);
-
-        /* Allows CSS to determine size of canvas */
-        this.canvas.width = this.canvas.clientWidth;
-        this.canvas.height = this.canvas.clientHeight;
-
-        this.clearAndDraw();
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener('resize', this._resizeHandler);
-    }
+    
 
     componentDidUpdate(prevProps, prevState) {
         // TODO Only redraw if the props have changed
         //if (this.props.secondRect !== prevProps.secondRect) {
-            this.clearAndDraw();
+            this.clearAndDraw()
         //}
     }
 
@@ -51,13 +30,16 @@ export default class CanvasComponent extends React.Component {
     draw(context) {
         let imageData = context.getImageData(0, 0, this.canvas.width, this.canvas.height)
         imageData = HistogramRenderer.render(imageData, Mandelbrot.escapeTimeTest,
-            Mandelbrot.maxIterations)
+            Mandelbrot.maxIterations, this.props.centerc, this.props.widthc)
         context.putImageData(imageData, 0, 0)
+
+        console.log("CanvasComponent.draw() returning.")
     }
 
     render() {
         return (
-            <canvas ref={canvas => this.canvas = canvas} className={this.props.className} />
+            <canvas ref={canvas => this.canvas = canvas} className={this.props.className}
+                width={this.props.width} height={this.props.height} />
         );
     }
 }
