@@ -1,5 +1,3 @@
-'use strict'
-
 /**
  * Normalize the pixel X to lie within the bounds of the mandelbrot set.
  * FIXME: currently the bounds are hard-coded.

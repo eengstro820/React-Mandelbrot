@@ -1,5 +1,3 @@
-'use strict'
-
 const bailout = 2
 export const maxIterations = 1000
 
@@ -20,7 +18,7 @@ export function escapeTimeTest(cx, cyi) {
     let iteration = 0
     let x = 0
     let y = 0
-    while ((x * x + y * y < 4) && (iteration < maxIterations)) {
+    while ((x * x + y * y < bailout * bailout) && (iteration < maxIterations)) {
         let xtemp = cx + x * x - y * y
         y = cyi + 2 * x * y
         x = xtemp
