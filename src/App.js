@@ -56,7 +56,7 @@ class App extends Component {
       color: 'white',
       padding: '5px',
       position: 'absolute',
-      left: '50px',
+      left: '25px',
       bottom: '0px',
       fontSize: '9px'
     }
@@ -70,8 +70,9 @@ class App extends Component {
           widthc={this.state.widthc}
           onClick={this.handleClick} />
         <p style={aboutStyle}>
-          <a href="https://github.com/eengstro820/React-Mandelbrot" 
-            target="_blank" rel="noopener noreferrer">About</a>
+          By Eric Engstrom. Click to zoom, shift-click to zoom out. <a 
+            href="https://github.com/eengstro820/React-Mandelbrot" 
+            target="_blank" rel="noopener noreferrer">Source code.</a>
         </p>
       </div>
     );

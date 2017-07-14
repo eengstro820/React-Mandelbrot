@@ -52,7 +52,7 @@ export default class CanvasComponent extends React.Component {
             color: 'white',
             padding: '5px',
             position: 'absolute',
-            right: '50px',
+            right: '25px',
             bottom: '0px',
             fontSize: '9px'
         }
