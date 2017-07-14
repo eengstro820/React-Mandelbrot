@@ -52,12 +52,14 @@ class App extends Component {
 
   render() {
     return (
-      <CanvasComponent className="TheCanvas" 
-        width={this.state.width} 
-        height={this.state.height}
-        centerc={this.state.centerc}
-        widthc={this.state.widthc}
-        onClick={this.handleClick} />
+      <div id="container">
+         <CanvasComponent className="TheCanvas" 
+          width={this.state.width}
+          height={this.state.height}
+          centerc={this.state.centerc}
+          widthc={this.state.widthc}
+          onClick={this.handleClick} /> 
+      </div>
     );
   }
 }
