@@ -51,6 +51,16 @@ class App extends Component {
   }
 
   render() {
+    let aboutStyle = {
+      backgroundColor: 'rgba(0, 0, 0, 0.3)',
+      color: 'white',
+      padding: '5px',
+      position: 'absolute',
+      left: '50px',
+      bottom: '0px',
+      fontSize: '9px'
+    }
+    
     return (
       <div id="container">
          <CanvasComponent className="TheCanvas" 
@@ -58,7 +68,11 @@ class App extends Component {
           height={this.state.height}
           centerc={this.state.centerc}
           widthc={this.state.widthc}
-          onClick={this.handleClick} /> 
+          onClick={this.handleClick} />
+        <p style={aboutStyle}>
+          <a href="https://github.com/eengstro820/React-Mandelbrot" 
+            target="_blank" rel="noopener noreferrer">About</a>
+        </p>
       </div>
     );
   }
