@@ -7,7 +7,9 @@ This project implements a simple [Mandelbrot Set](https://en.wikipedia.org/wiki/
 - User-editable color maps
 - Explore WebGL to leverage GPU hardware
 - General performance improvements in the histogram renderer
+  - Multi-threading
 - UI improvements
+  - Support HiDPI displays
   - Support panning with click-and-drag
   - Support scroll wheel and pinching gestures for zooming
   - Zoom about the cursor rather than about the window center
