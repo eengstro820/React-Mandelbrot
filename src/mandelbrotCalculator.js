@@ -1,17 +1,12 @@
-const bailout = 2
+const bailoutRadius = 2
 export const maxIterations = 1000
-
-export const minCX = -2.5
-export const maxCX = 1
-export const minCYI = -1
-export const maxCYI = 1
 
 /**
  * Using the Escape Time Algorithm, return 0 if the given point C, expressed as its real (cx) and 
  * imaginary (cyi) parts, is within the mandelbrot set (i.e., it does not escape to inf), or the 
  * number of iterations until the given location escapes the bailout value.
- * @param {number} cx - the real part of C, expressed as an X coordinate within [minCX, maxCX]
- * @param {number} cyi - the imaginary part of C, expressed as a Y coordinate within [minCYI, maxCYI]
+ * @param {number} cx - the real part of C, expressed as an X coordinate within [-2.5, 1]
+ * @param {number} cyi - the imaginary part of C, expressed as a Y coordinate within [-1.25, 1.25]
  * @return iterations until escape, or 0 if C does not escape.
  */
 export function escapeTimeTest(cx, cyi) {
@@ -25,7 +20,11 @@ export function escapeTimeTest(cx, cyi) {
     let x = 0
     let y = 0
 
-    while ((x * x + y * y < bailout * bailout) && (iteration < maxIterations)) {
+    // Iterate the series at C until it either escapes (using the pythagorean theorem to check)
+    // or the maximum number of iterations is reached. 
+    let bailoutSq = bailoutRadius * bailoutRadius
+    while ((x * x + y * y < bailoutSq) && (iteration < maxIterations)) {
+        // next iteration in the series
         let xtemp = cx + x * x - y * y
         let ytemp = cyi + 2 * x * y
 
@@ -45,7 +44,7 @@ export function escapeTimeTest(cx, cyi) {
 }
 
 /**
- * Test whether the given C is within the set's cartioid.
+ * Test whether the given C is within the mandelbrot set's cartioid.
  * @param {number} cx 
  * @param {number} cyi
  * @return true if C is within the cartioid, false otherwise
