@@ -1,4 +1,9 @@
+## Mandelbrot Set Explorer
 This project implements a simple [Mandelbrot Set](https://en.wikipedia.org/wiki/Mandelbrot_set) explorer in your web browser. It is written in the [React](https://facebook.github.io/react/) framework and the [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) language, and has been a fun exercise for me to learn more about these two technologies. This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+
+**See the Mandelbrot Explorer live [here](http://www.eengstro.com).**
+
+For build instructions, see the [README-CreateReactApp.md](README-CreateReactApp.md) file, or the Create React App [website](https://github.com/facebookincubator/create-react-app).
 
 ## Notes
 
