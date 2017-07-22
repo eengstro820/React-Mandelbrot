@@ -1,42 +1,37 @@
 import React from 'react'
 import * as HistogramRenderer from './histogramRenderer.js'
 import * as Mandelbrot from './mandelbrotCalculator'
-import ElapsedTimeComponent from './ElapsedTimeComponent'
 
 /**
  * A simple class that exposes the <canvas> as a React component. See
  * https://stackoverflow.com/questions/30296341/rendering-returning-html5-canvas-in-reactjs
  */
-export default class CanvasComponent extends React.Component {
+export default class CanvasComponent extends React.PureComponent {
     constructor(props) {
         super(props);
-        this.state = {
-            start: 0,
-            end: 0
-        }
+    }
+
+    componentDidMount() {
+        this.clearAndDraw()
     }
 
     componentDidUpdate(prevProps, prevState) {
-        // only redraw if the props have changed
-        if (this.props !== prevProps) {
-            this.clearAndDraw()
-        }
+        this.clearAndDraw()
     }
 
     clearAndDraw() {
-        this.setState({
-            start: Date.now(),
-        })
+        if (this.props.renderStarted) {
+            this.props.renderStarted()
+        }
 
         const context = this.canvas.getContext('2d');
         if (context) {
-            context.clearRect(0, 0, this.canvas.width, this.canvas.height);
             this.draw(context);
         }
 
-        this.setState({
-            end: Date.now()
-        })
+        if (this.props.renderEnded) {
+            this.props.renderEnded()
+        }
     }
 
     draw(context) {
@@ -47,25 +42,11 @@ export default class CanvasComponent extends React.Component {
     }
 
     render() {
-        let timeElapsedStyle = {
-            backgroundColor: 'rgba(0, 0, 0, 0.3)',
-            color: 'white',
-            padding: '5px',
-            position: 'absolute',
-            right: '25px',
-            bottom: '0px',
-            fontSize: '9px'
-        }
-
         return (
             <div>
                 <canvas ref={canvas => this.canvas = canvas} className={this.props.className}
                     width={this.props.width} height={this.props.height}
                     onClick={this.props.onClick} />
-                <ElapsedTimeComponent style={timeElapsedStyle} 
-                    start={this.state.start}
-                    end={this.state.end}
-                    default="Stand by..." />
             </div>
         );
     }
