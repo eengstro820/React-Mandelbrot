@@ -3,42 +3,38 @@ import * as HistogramRenderer from './histogramRenderer.js'
 import * as Mandelbrot from './mandelbrotCalculator'
 
 /**
- * A simple class that exposes the <canvas> as a React component. See
- * https://stackoverflow.com/questions/30296341/rendering-returning-html5-canvas-in-reactjs
+ * This component wraps a <canvas> and paints a mandelbrot set to it, based on passed-in props. 
+ * See https://stackoverflow.com/questions/30296341/rendering-returning-html5-canvas-in-reactjs
  */
-export default class CanvasComponent extends React.PureComponent {
+export default class MandelbrotCanvasComponent extends React.PureComponent {
     constructor(props) {
         super(props);
     }
 
     componentDidMount() {
-        this.clearAndDraw()
+        this.paintMandelbrot()
     }
 
     componentDidUpdate(prevProps, prevState) {
-        this.clearAndDraw()
+        this.paintMandelbrot()
     }
 
-    clearAndDraw() {
+    paintMandelbrot() {
         if (this.props.renderStarted) {
             this.props.renderStarted()
         }
 
         const context = this.canvas.getContext('2d');
         if (context) {
-            this.draw(context);
+            let imageData = context.getImageData(0, 0, this.canvas.width, this.canvas.height)
+            imageData = HistogramRenderer.render(imageData, Mandelbrot.escapeTimeTest,
+                Mandelbrot.maxIterations, this.props.centerc, this.props.widthc)
+            context.putImageData(imageData, 0, 0)
         }
 
         if (this.props.renderEnded) {
             this.props.renderEnded()
         }
-    }
-
-    draw(context) {
-        let imageData = context.getImageData(0, 0, this.canvas.width, this.canvas.height)
-        imageData = HistogramRenderer.render(imageData, Mandelbrot.escapeTimeTest,
-            Mandelbrot.maxIterations, this.props.centerc, this.props.widthc)
-        context.putImageData(imageData, 0, 0)
     }
 
     render() {

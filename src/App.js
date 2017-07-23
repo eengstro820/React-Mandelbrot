@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import CanvasComponent from './CanvasComponent'
+import MandelbrotCanvasComponent from './MandelbrotCanvasComponent'
 import ElapsedTimeComponent from './ElapsedTimeComponent'
 import * as RenderUtil from './renderUtil'
 
@@ -89,7 +89,7 @@ class App extends Component {
     
     return (
       <div id="container">
-        <CanvasComponent className="TheCanvas" 
+        <MandelbrotCanvasComponent className="TheCanvas" 
           width={this.state.width}
           height={this.state.height}
           centerc={this.state.centerc}

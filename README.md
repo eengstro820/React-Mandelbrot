@@ -31,11 +31,11 @@ It also allowed me to validate my design approach, which separates the renderer(
 ### Components
 There are a couple of React components in this program. 
 
-`CanvasComponent` wraps a \<canvas>, calls the renderer, and writes the renderer's output to the \<canvas>. It also records and reports how long each render takes (this is recorded as local state). It exposes several properties to control its behavior, including scene dimensions, center point, and an `onClick` callback.
+`MandelbrotCanvasComponent` wraps a \<canvas>, calls the renderer, and writes the renderer's output to the \<canvas>. It also reports when each mandelbrot render begins and ends. It exposes several properties to control its behavior, including scene dimensions, center point, and an `onClick` callback.
 
-`ElapsedTimeComponent` is used by the `CanvasComponent` to report elapsed rendering time in the corner of the browser window. It's a simple example of how React handles properties, and how changing those properties causes the component to refresh itself.
+`ElapsedTimeComponent` is used to report elapsed rendering time in the corner of the browser window. It's a simple example of how React handles properties, and how changing those properties causes the component to refresh itself.
 
-Its use by `CanvasComponent` also demonstrates, inadvertently, that JavaScript is single-threaded: the `ElapsedTimeComponent` should display "Stand by..." during rendering. However, it doesn't, since `histogramRenderer` is a tight, CPU-bound loop; while it's running, React's message handling is starved, and "Stand by..." is not (usually) displayed.
+It also demonstrates, inadvertently, that JavaScript is single-threaded: the `ElapsedTimeComponent` should display "Stand by..." during rendering. However, it doesn't, since `histogramRenderer` is a tight, CPU-bound loop; while it's running, React's message handling is starved, and "Stand by..." is not (usually) displayed.
 
 ### To-do
 - Additional renderers
